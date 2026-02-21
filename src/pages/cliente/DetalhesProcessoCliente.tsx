@@ -22,6 +22,10 @@ interface CaseDetail {
     titulo: string;
     explicacao: string;
   }>;
+  mensagemAdvogado?: {
+    data: string;
+    conteudo: string;
+  };
 }
 
 // Mock Data
@@ -111,6 +115,11 @@ const MOCK_CASOS_DETAIL: Record<string, CaseDetail> = {
         explicacao: "Sua petição inicial foi aceita e o processo começou oficialmente.",
       },
     ],
+    mensagemAdvogado: {
+      data: "20 de fevereiro",
+      conteudo:
+        "Olá! Espero que esteja tudo bem. Passando para avisar que consegui reunir a maioria dos documentos que precisamos para o seu caso. Os contratos anteriores que você enviou foram muito úteis e fortalecem bastante nossa posição. Nos próximos dias vou analisar a documentação da outra parte e preparar nossa resposta. Qualquer dúvida, é só chamar. Um abraço!",
+    },
   },
 };
 
@@ -125,14 +134,13 @@ const ProgressStages = ({ stage, status }: { stage: 1 | 2 | 3 | 4; status: CaseS
 
   return (
     <div className="space-y-4">
-      <h3 className="text-sm font-semibold text-foreground">Onde meu processo está?</h3>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center justify-between gap-0">
         {stages.map((s, idx) => (
-          <div key={s.num} className="flex items-center">
+          <div key={s.num} className="flex flex-col items-center flex-1">
             {/* Stage Circle */}
             <div
               className={cn(
-                "w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm transition-all",
+                "w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm transition-all mb-2",
                 stage >= s.num
                   ? "bg-[#FFC107] text-black"
                   : "bg-[#2E2E2E] text-muted-foreground"
@@ -141,25 +149,24 @@ const ProgressStages = ({ stage, status }: { stage: 1 | 2 | 3 | 4; status: CaseS
               {s.num}
             </div>
 
-            {/* Connector Line */}
+            {/* Connector Line - positioned correctly with previous circles */}
             {idx < stages.length - 1 && (
               <div
                 className={cn(
-                  "flex-1 h-1 mx-1 rounded transition-all",
+                  "absolute w-full h-1 rounded transition-all",
+                  "left-0 top-5",
                   stage > s.num ? "bg-[#FFC107]" : "bg-[#2E2E2E]"
                 )}
+                style={{
+                  width: "calc(100% - 40px)",
+                  left: "20px",
+                }}
               />
             )}
-          </div>
-        ))}
-      </div>
 
-      {/* Stage Labels */}
-      <div className="flex justify-between text-xs text-muted-foreground">
-        {stages.map((s) => (
-          <span key={s.num} className="w-10 text-center">
-            {s.label}
-          </span>
+            {/* Stage Label */}
+            <span className="text-xs text-muted-foreground text-center">{s.label}</span>
+          </div>
         ))}
       </div>
     </div>
@@ -231,7 +238,7 @@ const DetalhesProcessoCliente = () => {
         {/* Progress Section */}
         <Card className="border-[#2E2E2E] bg-[#1A1A1A] mb-8">
           <CardHeader className="pb-4">
-            <CardTitle className="text-lg">Progresso do Processo</CardTitle>
+            <CardTitle className="text-lg">Onde meu processo está?</CardTitle>
           </CardHeader>
           <CardContent>
             <ProgressStages stage={caso.stage} status={caso.status} />
@@ -259,6 +266,32 @@ const DetalhesProcessoCliente = () => {
             </p>
           </CardContent>
         </Card>
+
+        {/* Lawyer Message Section */}
+        {caso.mensagemAdvogado && (
+          <Card className="border-[#FFC107]/20 bg-[#1A1A1A] mb-8">
+            <CardHeader className="pb-4">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#FFC107]/20 flex items-center justify-center flex-shrink-0">
+                  <User className="w-5 h-5 text-[#FFC107]" />
+                </div>
+                <div className="flex-1">
+                  <CardTitle className="text-base text-foreground">
+                    {caso.advogado}
+                  </CardTitle>
+                  <CardDescription className="text-xs text-muted-foreground">
+                    {caso.mensagemAdvogado.data}
+                  </CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <p className="text-foreground text-sm leading-relaxed italic">
+                "{caso.mensagemAdvogado.conteudo}"
+              </p>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Timeline */}
         <Card className="border-[#2E2E2E] bg-[#1A1A1A] mb-8">
