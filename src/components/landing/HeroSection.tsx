@@ -49,15 +49,15 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Link to="/cadastro">
+          <Link to="/login-cliente">
             <Button variant="hero" size="lg" className="text-base px-8 py-6 animate-pulse-glow">
-              Começar Agora
+              Acompanhar meus processos
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
           <Link to="/login">
             <Button variant="hero-outline" size="lg" className="text-base px-8 py-6">
-              Fazer Login
+              Sou advogado
             </Button>
           </Link>
           <a href="#como-funciona">
