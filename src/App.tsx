@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
+import LoginCliente from "./pages/LoginCliente";
 import Cadastro from "./pages/Cadastro";
 import Dashboard from "./pages/Dashboard";
 import Processos from "./pages/dashboard/Processos";
@@ -13,6 +14,8 @@ import AdicionarProcesso from "./pages/dashboard/AdicionarProcesso";
 import Clientes from "./pages/dashboard/Clientes";
 import Assinatura from "./pages/dashboard/Assinatura";
 import Configuracoes from "./pages/dashboard/Configuracoes";
+import MeusCasos from "./pages/cliente/MeusCasos";
+import DetalhesProcessoCliente from "./pages/cliente/DetalhesProcessoCliente";
 import NotFound from "./pages/NotFound";
 import PageLoadingIndicator from "./components/PageLoadingIndicator";
 
@@ -28,6 +31,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/login-cliente" element={<LoginCliente />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/processos" element={<Processos />} />
@@ -36,6 +40,8 @@ const App = () => (
           <Route path="/dashboard/clientes" element={<Clientes />} />
           <Route path="/dashboard/assinatura" element={<Assinatura />} />
           <Route path="/dashboard/configuracoes" element={<Configuracoes />} />
+          <Route path="/cliente/casos" element={<MeusCasos />} />
+          <Route path="/cliente/casos/:id" element={<DetalhesProcessoCliente />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -14,7 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { Briefcase, Bell, Clock, AlertTriangle, Eye, EyeOff } from "lucide-react";
+import { Briefcase, Bell, Clock, AlertTriangle, Eye, EyeOff, LogIn } from "lucide-react";
 
 type FeedUpdateItem = {
   client: string;
@@ -140,6 +141,7 @@ const PROACTIVE_TEMPLATES = [
 ];
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const activeProcesses = 12;
   const planLimit = 30;
   const progressPercent = (activeProcesses / planLimit) * 100;
@@ -207,6 +209,17 @@ const Dashboard = () => {
   return (
     <DashboardLayout lawyerName="Dr. Carlos Silva">
       <div className="space-y-8">
+        {/* Client Access Button */}
+        <div className="flex justify-end">
+          <Button
+            onClick={() => navigate("/login-cliente")}
+            className="gap-2 bg-[#FFC107] text-black hover:bg-[#FFD54F]"
+          >
+            <LogIn className="w-4 h-4" />
+            Login do Cliente
+          </Button>
+        </div>
+
         {/* Cards de Resumo */}
         <div className="grid gap-4 md:grid-cols-3">
           {SUMMARY_CARDS.map((card) => {
