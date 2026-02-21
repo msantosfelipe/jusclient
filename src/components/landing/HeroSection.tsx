@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Scale } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from "@/assets/logo_v1.png";
 
 const HeroSection = () => {
   return (
@@ -18,12 +19,9 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex items-center justify-center gap-3 mb-12"
+          className="flex items-center justify-center mb-12"
         >
-          <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
-            <Scale className="w-6 h-6 text-primary" />
-          </div>
-          <span className="text-2xl font-bold tracking-tight">JUSCLIENT</span>
+          <img src={logo} alt="Jusclient Logo" className="h-32 md:h-40 w-auto" />
         </motion.div>
 
         <motion.h1
