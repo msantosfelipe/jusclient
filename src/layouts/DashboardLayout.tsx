@@ -18,7 +18,7 @@ import { cn } from "@/lib/utils";
 const SIDEBAR_ITEMS = [
   { to: "/dashboard", label: "Início (Dashboard)", icon: Home },
   { to: "/dashboard/processos", label: "Meus Processos", icon: Briefcase },
-  { to: "/dashboard/clientes", label: "Clientes", icon: Users },
+  { to: "/dashboard/clientes", label: "Meus Clientes", icon: Users },
   { to: "/dashboard/assinatura", label: "Assinatura e Limites", icon: CreditCard },
   { to: "/dashboard/configuracoes", label: "Configurações", icon: Settings },
 ];
