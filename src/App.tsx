@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Cadastro from "./pages/Cadastro";
 import Dashboard from "./pages/Dashboard";
 import Processos from "./pages/dashboard/Processos";
+import DetalhesProcesso from "./pages/dashboard/DetalhesProcesso";
 import AdicionarProcesso from "./pages/dashboard/AdicionarProcesso";
 import Clientes from "./pages/dashboard/Clientes";
 import Assinatura from "./pages/dashboard/Assinatura";
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/processos" element={<Processos />} />
+          <Route path="/dashboard/processos/:id" element={<DetalhesProcesso />} />
           <Route path="/dashboard/adicionar-processo" element={<AdicionarProcesso />} />
           <Route path="/dashboard/clientes" element={<Clientes />} />
           <Route path="/dashboard/assinatura" element={<Assinatura />} />

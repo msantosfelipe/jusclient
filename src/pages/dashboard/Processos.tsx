@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -215,24 +216,25 @@ const Processos = () => {
                     <td className="hidden px-4 py-3 text-muted-foreground md:table-cell">
                       {proc.lastMessage}
                     </td>
-                    <td className="px-4 py-3 text-center">
-                      {proc.readByClient ? (
-                        <CheckCircle2
-                          className="mx-auto h-5 w-5 text-emerald-500"
-                          title="Cliente visualizou"
-                        />
-                      ) : (
-                        <Circle
-                          className="mx-auto h-5 w-5 text-muted-foreground"
-                          title="Não visualizado"
-                        />
-                      )}
+                    <td className="px-4 py-3">
+                      <span
+                        className="flex justify-center"
+                        title={proc.readByClient ? "Cliente visualizou" : "Não visualizado"}
+                      >
+                        {proc.readByClient ? (
+                          <CheckCircle2 className="h-5 w-5 text-emerald-500" />
+                        ) : (
+                          <Circle className="h-5 w-5 text-muted-foreground" />
+                        )}
+                      </span>
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center justify-end gap-2">
-                        <Button variant="outline" size="sm" className="shrink-0">
-                          Ver Detalhes
-                        </Button>
+                        <Link to={`/dashboard/processos/${proc.id}`}>
+                            <Button variant="outline" size="sm" className="shrink-0">
+                              Ver Detalhes
+                            </Button>
+                          </Link>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
                             <Button variant="ghost" size="icon" className="h-8 w-8">
@@ -243,7 +245,7 @@ const Processos = () => {
                           <DropdownMenuContent align="end" className="border-border bg-[#1E1E1E]">
                             <DropdownMenuItem className="gap-2 text-destructive focus:text-destructive">
                               <Trash2 className="h-4 w-4" />
-                              Arquivar
+                              Arquivar Processo
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -301,9 +303,11 @@ const Processos = () => {
               </div>
               <div className="mt-3 flex items-center justify-between gap-2">
                 <ProgressBar3Stages stage={proc.progressStage} />
+                <Link to={`/dashboard/processos/${proc.id}`}>
                 <Button variant="outline" size="sm">
                   Ver Detalhes
                 </Button>
+              </Link>
               </div>
             </div>
           ))}
