@@ -8,10 +8,13 @@ import Login from "./pages/Login";
 import Cadastro from "./pages/Cadastro";
 import Dashboard from "./pages/Dashboard";
 import Processos from "./pages/dashboard/Processos";
+import DetalhesProcesso from "./pages/dashboard/DetalhesProcesso";
+import AdicionarProcesso from "./pages/dashboard/AdicionarProcesso";
 import Clientes from "./pages/dashboard/Clientes";
 import Assinatura from "./pages/dashboard/Assinatura";
 import Configuracoes from "./pages/dashboard/Configuracoes";
 import NotFound from "./pages/NotFound";
+import PageLoadingIndicator from "./components/PageLoadingIndicator";
 
 const queryClient = new QueryClient();
 
@@ -21,12 +24,15 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <PageLoadingIndicator />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/processos" element={<Processos />} />
+          <Route path="/dashboard/processos/:id" element={<DetalhesProcesso />} />
+          <Route path="/dashboard/adicionar-processo" element={<AdicionarProcesso />} />
           <Route path="/dashboard/clientes" element={<Clientes />} />
           <Route path="/dashboard/assinatura" element={<Assinatura />} />
           <Route path="/dashboard/configuracoes" element={<Configuracoes />} />

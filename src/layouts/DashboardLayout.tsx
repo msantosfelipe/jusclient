@@ -116,13 +116,15 @@ const DashboardLayout = ({ children, lawyerName = "Dr. Carlos Silva" }: Dashboar
             </Button>
             <p className="text-sm font-medium text-foreground">{lawyerName}</p>
           </div>
-          <Button
-            variant="hero"
-            className="bg-primary text-primary-foreground hover:bg-primary/90"
-          >
-            <Plus className="h-4 w-4" />
-            Adicionar Processo
-          </Button>
+          <Link to="/dashboard/adicionar-processo">
+            <Button
+              variant="hero"
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
+            >
+              <Plus className="h-4 w-4" />
+              Adicionar Processo
+            </Button>
+          </Link>
         </header>
 
         {/* Page content */}
