@@ -57,6 +57,11 @@ const HeroSection = () => {
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
+          <Link to="/login">
+            <Button variant="hero-outline" size="lg" className="text-base px-8 py-6">
+              Fazer Login
+            </Button>
+          </Link>
           <a href="#como-funciona">
             <Button variant="hero-outline" size="lg" className="text-base px-8 py-6">
               Como Funciona
