@@ -1,4 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Home,
@@ -8,6 +9,9 @@ import {
   Settings,
   Plus,
   Scale,
+  LogOut,
+  PanelLeftClose,
+  PanelLeft,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -26,12 +30,21 @@ interface DashboardLayoutProps {
 
 const DashboardLayout = ({ children, lawyerName = "Dr. Carlos Silva" }: DashboardLayoutProps) => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+  const handleLogout = () => {
+    navigate("/");
+  };
 
   return (
     <div className="flex min-h-screen bg-[#0F0F0F]">
       {/* Sidebar - fixa à esquerda, fundo #121212 */}
       <aside
-        className="fixed left-0 top-0 z-40 hidden h-screen w-56 flex-col border-r border-border md:flex"
+        className={cn(
+          "fixed left-0 top-0 z-40 hidden h-screen flex-col border-r border-border transition-all duration-200 md:flex",
+          sidebarCollapsed ? "w-0 overflow-hidden" : "w-56"
+        )}
         style={{ backgroundColor: "#121212" }}
       >
         <div className="flex h-16 items-center gap-2 border-b border-border px-6">
@@ -40,14 +53,14 @@ const DashboardLayout = ({ children, lawyerName = "Dr. Carlos Silva" }: Dashboar
           </div>
           <span className="text-lg font-bold tracking-tight">JUSCLIENT</span>
         </div>
-        <nav className="flex flex-1 flex-col gap-1 p-4">
+        <nav className="flex flex-1 flex-col gap-1 overflow-hidden p-4">
           {SIDEBAR_ITEMS.map(({ to, label, icon: Icon }) => {
             const isActive =
               to === "/dashboard"
                 ? location.pathname === "/dashboard"
                 : location.pathname.startsWith(to);
             return (
-              <Link key={to} to={to}>
+              <Link key={to} to={to} className="min-w-0 shrink-0">
                 <div
                   className={cn(
                     "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
@@ -59,19 +72,50 @@ const DashboardLayout = ({ children, lawyerName = "Dr. Carlos Silva" }: Dashboar
                   <Icon
                     className={cn("h-5 w-5 shrink-0", isActive ? "text-primary" : "text-muted-foreground")}
                   />
-                  <span>{label}</span>
+                  <span className="truncate">{label}</span>
                 </div>
               </Link>
             );
           })}
+          <div className="mt-auto pt-4">
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground"
+            >
+              <LogOut className="h-5 w-5 shrink-0" />
+              <span>Sair</span>
+            </button>
+          </div>
         </nav>
       </aside>
 
       {/* Main content area */}
-      <div className="flex flex-1 flex-col pl-0 md:pl-56">
+      <div
+        className={cn(
+          "flex flex-1 flex-col transition-[padding] duration-200 pl-0",
+          !sidebarCollapsed && "md:pl-56"
+        )}
+      >
         {/* Header */}
-        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border bg-background/95 px-6 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <p className="text-sm font-medium text-foreground">{lawyerName}</p>
+        <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-4 border-b border-border bg-background/95 px-6 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-9 w-9 shrink-0 md:flex"
+              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+              title={sidebarCollapsed ? "Exibir menu" : "Ocultar menu"}
+            >
+              {sidebarCollapsed ? (
+                <PanelLeft className="h-5 w-5" />
+              ) : (
+                <PanelLeftClose className="h-5 w-5" />
+              )}
+              <span className="sr-only">{sidebarCollapsed ? "Exibir menu" : "Ocultar menu"}</span>
+            </Button>
+            <p className="text-sm font-medium text-foreground">{lawyerName}</p>
+          </div>
           <Button
             variant="hero"
             className="bg-primary text-primary-foreground hover:bg-primary/90"
