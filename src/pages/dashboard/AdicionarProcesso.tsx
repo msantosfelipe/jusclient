@@ -60,6 +60,10 @@ const AdicionarProcesso = () => {
     }, 800);
   };
 
+  const isStep2Visible = searchResult !== null;
+  const isStep3Visible = selectedClient !== "";
+  const isButtonEnabled = selectedClient !== "";
+
   const handleConfirm = () => {
     navigate("/dashboard/processos");
   };
@@ -145,102 +149,106 @@ const AdicionarProcesso = () => {
             </Card>
 
             {/* Passo 2 - Cliente */}
-            <Card className="border-border bg-[#1E1E1E]">
-              <CardHeader>
-                <CardTitle className="text-base">Passo 2 — Vincular Cliente</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <Label>Cliente</Label>
-                  <Select value={selectedClient} onValueChange={setSelectedClient}>
-                    <SelectTrigger className="border-border bg-background">
-                      <SelectValue placeholder="Selecione o cliente" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {MOCK_CLIENTS.map((client) => (
-                        <SelectItem key={client.id} value={client.id}>
-                          {client.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <p className="text-xs text-muted-foreground">
-                    Este cliente receberá as atualizações simplificadas no Jusclient.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+            {isStep2Visible && (
+              <Card className="border-border bg-[#1E1E1E]">
+                <CardHeader>
+                  <CardTitle className="text-base">Passo 2 — Vincular Cliente</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-2">
+                    <Label>Cliente</Label>
+                    <Select value={selectedClient} onValueChange={setSelectedClient}>
+                      <SelectTrigger className="border-border bg-background">
+                        <SelectValue placeholder="Selecione o cliente" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {MOCK_CLIENTS.map((client) => (
+                          <SelectItem key={client.id} value={client.id}>
+                            {client.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <p className="text-xs text-muted-foreground">
+                      Este cliente receberá as atualizações simplificadas no Jusclient.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
 
             {/* Passo 3 - Configurações de Comunicação */}
-            <Card className="border-border bg-[#1E1E1E]">
-              <CardHeader>
-                <CardTitle className="text-base">Passo 3 — Configurações de Comunicação</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="space-y-3">
-                  <Label>Modo de envio</Label>
-                  <RadioGroup
-                    value={communicationMode}
-                    onValueChange={(v) => setCommunicationMode(v as "manual" | "auto")}
-                    className="grid gap-3 sm:grid-cols-2"
-                  >
-                    <label
-                      className={cn(
-                        "flex cursor-pointer flex-col gap-2 rounded-lg border p-4 transition-colors",
-                        communicationMode === "manual"
-                          ? "border-primary bg-primary/5"
-                          : "border-border hover:border-primary/50"
-                      )}
+            {isStep3Visible && (
+              <Card className="border-border bg-[#1E1E1E]">
+                <CardHeader>
+                  <CardTitle className="text-base">Passo 3 — Configurações de Comunicação</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="space-y-3">
+                    <Label>Modo de envio</Label>
+                    <RadioGroup
+                      value={communicationMode}
+                      onValueChange={(v) => setCommunicationMode(v as "manual" | "auto")}
+                      className="grid gap-3 sm:grid-cols-2"
                     >
-                      <div className="flex items-center gap-2">
-                        <RadioGroupItem value="manual" id="manual" />
-                        <span className="font-medium">Revisão Manual</span>
-                        <span className="rounded bg-primary/20 px-2 py-0.5 text-xs font-medium text-primary">
-                          Recomendado
-                        </span>
-                      </div>
-                      <p className="text-xs text-muted-foreground">
-                        Você valida a tradução antes do envio.
-                      </p>
-                    </label>
-                    <label
-                      className={cn(
-                        "flex cursor-pointer flex-col gap-2 rounded-lg border p-4 transition-colors",
-                        communicationMode === "auto"
-                          ? "border-primary bg-primary/5"
-                          : "border-border hover:border-primary/50"
-                      )}
-                    >
-                      <div className="flex items-center gap-2">
-                        <RadioGroupItem value="auto" id="auto" />
-                        <span className="font-medium">Automação Total</span>
-                      </div>
-                      <p className="text-xs text-muted-foreground">
-                        O sistema informa o cliente instantaneamente.
-                      </p>
-                    </label>
-                  </RadioGroup>
-                </div>
-                <div className="space-y-2">
-                  <Label>Fase do Processo</Label>
-                  <Select value={faseInicial} onValueChange={setFaseInicial}>
-                    <SelectTrigger className="border-border bg-background">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {FASES_PROCESSO.map((fase) => (
-                        <SelectItem key={fase.value} value={fase.value}>
-                          {fase.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <p className="text-xs text-muted-foreground">
-                    Define o ponto de partida na barra de progresso visual do cliente.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+                      <label
+                        className={cn(
+                          "flex cursor-pointer flex-col gap-2 rounded-lg border p-4 transition-colors",
+                          communicationMode === "manual"
+                            ? "border-primary bg-primary/5"
+                            : "border-border hover:border-primary/50"
+                        )}
+                      >
+                        <div className="flex items-center gap-2">
+                          <RadioGroupItem value="manual" id="manual" />
+                          <span className="font-medium">Revisão Manual</span>
+                          <span className="rounded bg-primary/20 px-2 py-0.5 text-xs font-medium text-primary">
+                            Recomendado
+                          </span>
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          Você valida a tradução antes do envio.
+                        </p>
+                      </label>
+                      <label
+                        className={cn(
+                          "flex cursor-pointer flex-col gap-2 rounded-lg border p-4 transition-colors",
+                          communicationMode === "auto"
+                            ? "border-primary bg-primary/5"
+                            : "border-border hover:border-primary/50"
+                        )}
+                      >
+                        <div className="flex items-center gap-2">
+                          <RadioGroupItem value="auto" id="auto" />
+                          <span className="font-medium">Automação Total</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          O sistema informa o cliente instantaneamente.
+                        </p>
+                      </label>
+                    </RadioGroup>
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Fase do Processo</Label>
+                    <Select value={faseInicial} onValueChange={setFaseInicial}>
+                      <SelectTrigger className="border-border bg-background">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {FASES_PROCESSO.map((fase) => (
+                          <SelectItem key={fase.value} value={fase.value}>
+                            {fase.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <p className="text-xs text-muted-foreground">
+                      Define o ponto de partida na barra de progresso visual do cliente.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
           </div>
 
           {/* Sidebar de Limites */}
@@ -263,7 +271,8 @@ const AdicionarProcesso = () => {
                 <Button
                   variant="hero"
                   size="lg"
-                  className="w-full bg-primary py-6 text-base text-primary-foreground"
+                  disabled={!isButtonEnabled}
+                  className="w-full bg-primary py-6 text-base text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed"
                   onClick={handleConfirm}
                 >
                   Iniciar Monitoramento
