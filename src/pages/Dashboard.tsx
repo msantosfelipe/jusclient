@@ -209,17 +209,6 @@ const Dashboard = () => {
   return (
     <DashboardLayout lawyerName="Dr. Carlos Silva">
       <div className="space-y-8">
-        {/* Client Access Button */}
-        <div className="flex justify-end">
-          <Button
-            onClick={() => navigate("/login-cliente")}
-            className="gap-2 bg-[#FFC107] text-black hover:bg-[#FFD54F]"
-          >
-            <LogIn className="w-4 h-4" />
-            Login do Cliente
-          </Button>
-        </div>
-
         {/* Cards de Resumo */}
         <div className="grid gap-4 md:grid-cols-3">
           {SUMMARY_CARDS.map((card) => {
