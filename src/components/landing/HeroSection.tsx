@@ -60,7 +60,20 @@ const HeroSection = () => {
               Sou advogado
             </Button>
           </Link>
-          <a href="#como-funciona">
+          {/* <a href="#como-funciona">
+            <Button variant="hero-outline" size="lg" className="text-base px-8 py-6">
+              Como Funciona
+            </Button>
+          </a> */}
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              document
+                .getElementById("como-funciona")
+                ?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
             <Button variant="hero-outline" size="lg" className="text-base px-8 py-6">
               Como Funciona
             </Button>

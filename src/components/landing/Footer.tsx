@@ -23,8 +23,10 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-sm mb-4">Plataforma</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#como-funciona" className="hover:text-foreground transition-colors">Como Funciona</a></li>
-              <li><a href="#precos" className="hover:text-foreground transition-colors">Preços</a></li>
+              {/* <li><a href="#como-funciona" className="hover:text-foreground transition-colors">Como Funciona</a></li> */}
+              <li><a href="#" onClick={(e) => { e.preventDefault(); document.getElementById("como-funciona") ?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-foreground transition-colors">Como Funciona</a></li>
+              {/* <li><a href="#precos" className="hover:text-foreground transition-colors">Preços</a></li> */}
+              <li><a href="#" onClick={(e) => { e.preventDefault(); document.getElementById("precos") ?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-foreground transition-colors">Preços</a></li>
               <li><Link to="/login" className="hover:text-foreground transition-colors">Login</Link></li>
               <li><Link to="/cadastro" className="hover:text-foreground transition-colors">Cadastro</Link></li>
             </ul>
