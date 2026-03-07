@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HashRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import VslPage from "./pages/VslPage";
 import Login from "./pages/Login";
 import LoginCliente from "./pages/LoginCliente";
 import Cadastro from "./pages/Cadastro";
@@ -18,6 +18,7 @@ import MeusCasos from "./pages/cliente/MeusCasos";
 import DetalhesProcessoCliente from "./pages/cliente/DetalhesProcessoCliente";
 import NotFound from "./pages/NotFound";
 import PageLoadingIndicator from "./components/PageLoadingIndicator";
+import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
 
@@ -29,7 +30,9 @@ const App = () => (
       <HashRouter>
         <PageLoadingIndicator />
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<VslPage />} />
+          <Route path="/landing" element={<Index />} />
+          <Route path="/vsl" element={<VslPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/login-cliente" element={<LoginCliente />} />
           <Route path="/cadastro" element={<Cadastro />} />
