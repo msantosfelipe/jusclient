@@ -33,4 +33,4 @@ jobs:
           password: ${{ secrets.FTP_PASS }}
           local-dir: dist/
           server-dir: public_html/
-          delete-remote: true
+          dangerous-clean-slate: true
