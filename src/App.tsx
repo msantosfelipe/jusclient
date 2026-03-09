@@ -30,8 +30,7 @@ const App = () => (
       <HashRouter>
         <PageLoadingIndicator />
         <Routes>
-          <Route path="/" element={<VslPage />} />
-          <Route path="/landing" element={<Index />} />
+          <Route path="/" element={<Index />} />
           <Route path="/vsl" element={<VslPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/login-cliente" element={<LoginCliente />} />

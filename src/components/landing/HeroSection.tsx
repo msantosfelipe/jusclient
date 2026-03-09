@@ -1,105 +1,95 @@
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import bgHero from "@/assets/bg-hero.jpg";
 import logo from "@/assets/logo_v1.png";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onOpenModal: () => void;
+}
+
+const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
-      {/* Background gradient effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[100px]" />
-      </div>
+    <>
+      <header className="relative z-20 border-b border-white/10" style={{ backgroundColor: "#0A0A0A" }}>
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-center px-4 py-4">
+          <img src={logo} alt="Jusclient" className="h-10 w-auto md:h-12" />
+        </div>
+      </header>
 
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
-        {/* Logo placeholder */}
+      <section className="section-bg-image min-h-screen flex flex-col items-center justify-center px-4 pb-16 pt-10">
+        <img src={bgHero} alt="" className="section-bg-img" />
+
+        <div className="section-bg-overlay" style={{ background: "hsl(var(--background) / 0.85)" }} />
+
+      <div className="section-content w-full flex flex-col items-center">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex items-center justify-center mb-12"
+          transition={{ duration: 0.7 }}
+          className="max-w-4xl mx-auto text-center"
         >
-          <img src={logo} alt="Jusclient Logo" className="h-32 md:h-40 w-auto" />
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
-        >
-          Conectando advogados e clientes com{" "}
-          <span className="text-gradient-primary">comunicação clara</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
-        >
-          O aplicativo que traduz o juridiquês para linguagem simples e automatiza a comunicação entre advogados e clientes.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <Link to="/login-cliente">
-            <Button variant="hero" size="lg" className="text-base px-8 py-6 animate-pulse-glow">
-              Acompanhar meus processos
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-          </Link>
-          <Link to="/login">
-            <Button variant="hero-outline" size="lg" className="text-base px-8 py-6">
-              Sou advogado
-            </Button>
-          </Link>
-          {/* <a href="#como-funciona">
-            <Button variant="hero-outline" size="lg" className="text-base px-8 py-6">
-              Como Funciona
-            </Button>
-          </a> */}
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              document
-                .getElementById("como-funciona")
-                ?.scrollIntoView({ behavior: "smooth" });
-            }}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="section-badge mb-8 inline-block"
           >
-            <Button variant="hero-outline" size="lg" className="text-base px-8 py-6">
-              Como Funciona
-            </Button>
-          </a>
+            Plataforma para Advogados
+          </motion.div>
+
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6">
+            Seu cliente merece{" "}
+            <span className="gradient-text-gold">entender</span>{" "}
+            o próprio processo.
+          </h1>
+
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+            Pare de responder as mesmas perguntas todos os dias. Com o Jusclient,
+            seu cliente acompanha tudo em tempo real, em linguagem simples.
+          </p>
         </motion.div>
 
-        {/* Stats */}
+        {/* VSL */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-20 grid grid-cols-3 gap-8 max-w-lg mx-auto"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="w-full max-w-3xl mx-auto mb-10"
         >
-          {[
-            { value: "70%", label: "Menos perguntas" },
-            { value: "24/7", label: "Disponibilidade" },
-            { value: "100%", label: "Transparência" },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-gradient-primary">{stat.value}</div>
-              <div className="text-xs md:text-sm text-muted-foreground mt-1">{stat.label}</div>
+          <div className="aspect-video rounded-2xl border border-border overflow-hidden" style={{ background: "hsl(var(--surface-elevated))" }}>
+            <div className="w-full h-full flex items-center justify-center">
+              <div className="text-center">
+                <motion.div
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center border-2"
+                  style={{ borderColor: "hsl(var(--gold) / 0.4)", background: "hsl(var(--gold) / 0.1)" }}
+                >
+                  <svg className="w-8 h-8 ml-1" style={{ color: "hsl(var(--gold))" }} fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </motion.div>
+                <p className="text-sm text-muted-foreground">Assista a apresentação</p>
+              </div>
             </div>
-          ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="text-center"
+        >
+          <button onClick={onOpenModal} className="btn-primary-glow text-base md:text-lg">
+            Fazer Teste Gratuito →
+          </button>
+          <p className="text-muted-foreground text-sm mt-4">
+            Sem pagamento • Demonstração limitada de 30 minutos
+          </p>
         </motion.div>
       </div>
     </section>
+    </>
   );
 };
 
