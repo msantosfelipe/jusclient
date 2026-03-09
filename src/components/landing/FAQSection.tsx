@@ -23,7 +23,6 @@ const FAQSection = () => {
 
       <div className="section-content max-w-3xl mx-auto">
         <div className="text-center mb-12">
-          <span className="section-badge mb-6 inline-block">FAQ</span>
           <h2 className="text-3xl md:text-4xl font-extrabold">Perguntas Frequentes</h2>
         </div>
 

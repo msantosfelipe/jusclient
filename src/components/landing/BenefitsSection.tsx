@@ -19,7 +19,6 @@ const BenefitsSection = () => {
   return (
     <section className="py-24 px-4">
       <div className="max-w-6xl mx-auto">
-        <span className="section-badge mb-6 inline-block">Para Advogados</span>
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-10">

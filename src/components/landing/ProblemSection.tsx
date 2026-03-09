@@ -23,9 +23,6 @@ const ProblemSection = () => {
 
       <div className="section-content max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <span className="section-badge mb-8 inline-block" style={{ color: "hsl(var(--red-accent))", borderColor: "hsl(var(--red-accent) / 0.3)", background: "hsl(var(--red-accent) / 0.1)" }}>
-            O Problema
-          </span>
           <div className="grid md:grid-cols-2 gap-16 items-start">
             <div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-8">

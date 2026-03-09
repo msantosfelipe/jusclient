@@ -27,22 +27,13 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
           transition={{ duration: 0.7 }}
           className="max-w-4xl mx-auto text-center"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="section-badge mb-8 inline-block"
-          >
-            Plataforma para Advogados
-          </motion.div>
-
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6">
             Seu cliente merece{" "}
             <span className="gradient-text-gold">entender</span>{" "}
             o próprio processo.
           </h1>
 
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
             Pare de responder as mesmas perguntas todos os dias. Com o Jusclient,
             seu cliente acompanha tudo em tempo real, em linguagem simples.
           </p>

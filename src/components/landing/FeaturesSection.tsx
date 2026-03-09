@@ -18,9 +18,6 @@ const FeaturesSection = () => {
       <div className="section-bg-overlay" />
 
       <div className="section-content max-w-6xl mx-auto text-center">
-        <span className="section-badge mb-6 inline-block" style={{ color: "hsl(var(--green-accent))", borderColor: "hsl(var(--green-accent) / 0.3)", background: "hsl(var(--green-accent) / 0.1)" }}>
-          Funcionalidades
-        </span>
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4">
           Tudo que você precisa em um só lugar
         </h2>
