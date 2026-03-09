@@ -1,50 +1,40 @@
-import { Scale } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Instagram, MessageCircle } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border py-16 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-4 gap-10 mb-12">
-          {/* Brand */}
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
-                <Scale className="w-4 h-4 text-primary" />
-              </div>
-              <span className="text-lg font-bold">JUSCLIENT</span>
-            </div>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-              Democratizar o acesso à informação jurídica através de tecnologia e comunicação simples.
-            </p>
-          </div>
-
-          {/* Links */}
-          <div>
-            <h4 className="font-semibold text-sm mb-4">Plataforma</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              {/* <li><a href="#como-funciona" className="hover:text-foreground transition-colors">Como Funciona</a></li> */}
-              <li><a href="#" onClick={(e) => { e.preventDefault(); document.getElementById("como-funciona") ?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-foreground transition-colors">Como Funciona</a></li>
-              {/* <li><a href="#precos" className="hover:text-foreground transition-colors">Preços</a></li> */}
-              <li><a href="#" onClick={(e) => { e.preventDefault(); document.getElementById("precos") ?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-foreground transition-colors">Preços</a></li>
-              <li><Link to="/login" className="hover:text-foreground transition-colors">Login</Link></li>
-              <li><Link to="/cadastro" className="hover:text-foreground transition-colors">Cadastro</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold text-sm mb-4">Institucional</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Termos de Uso</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Privacidade</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Contato</a></li>
-            </ul>
-          </div>
+    <footer className="border-t border-border py-10 px-4 relative">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[100px] rounded-full opacity-5 blur-[80px] pointer-events-none" style={{ background: "hsl(var(--gold))" }} />
+      
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+        <div>
+          <span className="text-xl font-bold font-display gradient-text-gold">JusClient</span>
+          <p className="text-xs text-muted-foreground mt-1">
+            Transformando a comunicação jurídica.
+          </p>
         </div>
 
-        <div className="border-t border-border pt-6 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Jusclient. Todos os direitos reservados.
+        <div className="flex items-center gap-3">
+          {/* <a
+            href="https://wa.me/5511999999999"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full flex items-center justify-center border border-border hover:border-primary/40 hover:bg-muted/30 transition-all"
+          >
+            <MessageCircle size={18} className="text-muted-foreground" />
+          </a> */}
+          <a
+            href="https://instagram.com/jusclient"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full flex items-center justify-center border border-border hover:border-primary/40 hover:bg-muted/30 transition-all"
+          >
+            <Instagram size={18} className="text-muted-foreground" />
+          </a>
         </div>
+
+        <p className="text-xs text-muted-foreground">
+          © {new Date().getFullYear()} JusClient. Todos os direitos reservados.
+        </p>
       </div>
     </footer>
   );

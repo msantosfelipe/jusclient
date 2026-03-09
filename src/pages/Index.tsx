@@ -1,10 +1,16 @@
 import HeroSection from "@/components/landing/HeroSection";
 import LeadModal from "@/components/landing/LeadModal";
-import ProblemSolutionSection from "@/components/landing/ProblemSolutionSection";
-import TranslatorSection from "@/components/landing/TranslatorSection";
-import NetworkEffectSection from "@/components/landing/NetworkEffectSection";
-import PricingSection from "@/components/landing/PricingSection";
+import ProblemSection from "@/components/landing/ProblemSection";
+import SolutionSection from "@/components/landing/SolutionSection";
+import BenefitsSection from "@/components/landing/BenefitsSection";
+import FeaturesSection from "@/components/landing/FeaturesSection";
+import IntermediateCTA from "@/components/landing/IntermediateCTA";
+import DifferentialsSection from "@/components/landing/DifferentialsSection";
+import SocialProofSection from "@/components/landing/SocialProofSection";
+import FAQSection from "@/components/landing/FAQSection";
+import FinalCTASection from "@/components/landing/FinalCTASection";
 import Footer from "@/components/landing/Footer";
+import WhatsAppFloat from "@/components/landing/WhatsAppFloat";
 import { useState } from "react";
 
 const Index = () => {
@@ -13,8 +19,8 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <HeroSection onOpenModal={() => setModalOpen(true)} />
-      {/* <ProblemSection /> */}
-      {/* <SolutionSection />
+      <ProblemSection />
+      <SolutionSection />
       <BenefitsSection />
       <FeaturesSection />
       <IntermediateCTA onOpenModal={() => setModalOpen(true)} />
@@ -23,7 +29,7 @@ const Index = () => {
       <FAQSection />
       <FinalCTASection onOpenModal={() => setModalOpen(true)} />
       <Footer />
-      <WhatsAppFloat /> */}
+      {/* <WhatsAppFloat /> */}
       <LeadModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
   );
