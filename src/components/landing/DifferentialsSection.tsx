@@ -19,9 +19,6 @@ const DifferentialsSection = () => {
     <section className="py-24 px-4">
       <div className="max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-          <span className="section-badge mb-6 inline-block">
-            <Sparkles size={14} /> Diferencial Exclusivo
-          </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4">
             O cliente finalmente entende o que está acontecendo
           </h2>

@@ -1,11 +1,14 @@
 import { motion } from "framer-motion";
+import socialProofEduardo from "@/assets/social_proof/social_proof_dr_eduardo.jpeg";
+import socialProofRafael from "@/assets/social_proof/social_proof_dr_rafael.jpeg";
+import socialProofCamila from "@/assets/social_proof/social_proof_dra_camila.jpeg";
 
 const SocialProofSection = () => {
   const videoPlaceholders = ["Depoimento - Advogado 1", "Depoimento - Advogado 2", "Depoimento - Advogado 3"];
   const whatsappFeedbacks = [
-    { name: "Dr. Carlos", msg: "O JusClient mudou completamente a forma como me comunico com meus clientes. Reduziu 80% das ligações!" },
-    { name: "Dra. Fernanda", msg: "Meus clientes adoraram! Agora eles acompanham tudo pelo app e não me ligam mais para perguntar sobre prazos." },
-    { name: "Dr. Rafael", msg: "Implementei no meu escritório há 2 meses e já percebi uma diferença absurda na produtividade da equipe." },
+    { name: "Dr. Eduardo", image: socialProofEduardo },
+    { name: "Dra. Camila", image: socialProofCamila },
+    { name: "Dr. Rafael", image: socialProofRafael },
   ];
 
   return (
@@ -34,7 +37,7 @@ const SocialProofSection = () => {
         <div className="grid sm:grid-cols-3 gap-5">
           {whatsappFeedbacks.map((fb, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-              className="card-feature text-left">
+              className="relative rounded-2xl p-6 border border-border transition-all duration-300 overflow-hidden text-left flex flex-col h-screen max-h-96 min-h-96 lg:min-h-[500px]" style={{ background: "hsl(var(--surface-elevated))" }}>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-11 h-11 rounded-full flex items-center justify-center font-bold text-sm" style={{ background: "hsl(var(--green-accent) / 0.15)", color: "hsl(var(--green-accent))" }}>
                   {fb.name.charAt(0)}
@@ -44,8 +47,8 @@ const SocialProofSection = () => {
                   <p className="text-xs text-muted-foreground">via WhatsApp</p>
                 </div>
               </div>
-              <div className="rounded-xl p-4 text-sm" style={{ background: "hsl(var(--green-accent) / 0.06)", borderLeft: "3px solid hsl(var(--green-accent) / 0.4)" }}>
-                "{fb.msg}"
+              <div className="rounded-xl overflow-hidden flex-1">
+                <img src={fb.image} alt={fb.name} className="w-full h-full object-contain bg-black/5" />
               </div>
             </motion.div>
           ))}
