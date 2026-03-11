@@ -3,9 +3,9 @@ import { X, MessageSquareWarning, Clock, TrendingDown } from "lucide-react";
 import bgProblem from "@/assets/bg-problem.jpg";
 
 const problems = [
-  { icon: MessageSquareWarning, color: "hsl(var(--red-accent))", title: "Cliente ansioso", desc: "Não entende termos jurídicos e fica perdido sobre o andamento do processo." },
-  { icon: Clock, color: "hsl(var(--red-accent))", title: "Bombardeio de mensagens", desc: "Ligações e mensagens constantes pedindo explicações que consomem horas do advogado." },
-  { icon: TrendingDown, color: "hsl(var(--red-accent))", title: "Perda de produtividade", desc: "Advogado gasta tempo precioso com explicações repetitivas em vez de atuar nos casos." },
+  { icon: MessageSquareWarning, color: "hsl(var(--gold))", title: "Cliente ansioso", desc: "Não entende termos jurídicos e fica perdido sobre o andamento do processo." },
+  { icon: Clock, color: "hsl(var(--gold))", title: "Bombardeio de mensagens", desc: "Ligações e mensagens constantes pedindo explicações que consomem horas do advogado." },
+  { icon: TrendingDown, color: "hsl(var(--gold))", title: "Perda de produtividade", desc: "Advogado gasta tempo precioso com explicações repetitivas em vez de atuar nos casos." },
 ];
 
 const questions = [

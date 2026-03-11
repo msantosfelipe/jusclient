@@ -22,7 +22,7 @@ const SolutionSection = () => {
           viewport={{ once: true }}
           className="glass-surface p-8 md:p-12"
         >
-          <span className="text-sm font-bold tracking-widest uppercase gradient-text-gold mb-4 block">
+          <span className="text-m font-bold tracking-widest uppercase gradient-text-gold mb-4 inline-block">
             A Solução
           </span>
           <h2 className="text-3xl md:text-4xl font-extrabold mb-8">

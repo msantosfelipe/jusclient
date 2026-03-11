@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Sparkles } from "lucide-react";
 
 const translations = [
   { juridiques: '"Sentença proferida"', traducao: '"O juiz já deu a decisão sobre seu caso. Seu advogado vai te explicar o resultado em breve."' },
@@ -9,9 +8,9 @@ const translations = [
 ];
 
 const phases = [
-  { name: "Início do Processo", range: "0-25%", desc: "Processo em andamento inicial", value: 15, color: "hsl(var(--blue-accent))" },
+  { name: "Início do Processo", range: "0-25%", desc: "Processo em andamento inicial", value: 15, color: "hsl(var(--gold))" },
   { name: "Audiências e Análises", range: "25-75%", desc: "Fase de instrução e apresentação de provas", value: 50, color: "hsl(var(--gold))" },
-  { name: "Decisão Final", range: "75-100%", desc: "Fase final / decisão / execução", value: 90, color: "hsl(var(--green-accent))" },
+  { name: "Decisão Final", range: "75-100%", desc: "Fase final / decisão / execução", value: 90, color: "hsl(var(--gold))" },
 ];
 
 const DifferentialsSection = () => {

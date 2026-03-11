@@ -3,12 +3,12 @@ import { Clock, Bell, MessageCircle, FileText, Star, Shield } from "lucide-react
 import bgFeatures from "@/assets/bg-features.jpg";
 
 const features = [
-  { icon: Clock, title: "Acompanhamento em Tempo Real", desc: "Cliente visualiza cada movimentação do processo no momento em que acontece, sem precisar ligar.", color: "hsl(var(--purple-accent))" },
+  { icon: Clock, title: "Acompanhamento em Tempo Real", desc: "Cliente visualiza cada movimentação do processo no momento em que acontece, sem precisar ligar.", color: "hsl(var(--gold))" },
   { icon: Bell, title: "Notificações Inteligentes", desc: "Alertas automáticos quando há movimentação no processo. Cliente sempre informado.", color: "hsl(var(--gold))" },
-  { icon: MessageCircle, title: "Chat Integrado", desc: "Comunicação organizada dentro do app. Sem mais WhatsApp pessoal misturado.", color: "hsl(var(--green-accent))" },
-  { icon: FileText, title: "Envio de Documentos", desc: "Cliente envia documentos diretamente pelo app. Tudo organizado por processo.", color: "hsl(var(--purple-accent))" },
+  { icon: MessageCircle, title: "Chat Integrado", desc: "Comunicação organizada dentro do app. Sem mais WhatsApp pessoal misturado.", color: "hsl(var(--gold))" },
+  { icon: FileText, title: "Envio de Documentos", desc: "Cliente envia documentos diretamente pelo app. Tudo organizado por processo.", color: "hsl(var(--gold))" },
   { icon: Star, title: "Sistema de Avaliação", desc: "Construa sua reputação com avaliações reais de clientes satisfeitos.", color: "hsl(var(--gold))" },
-  { icon: Shield, title: "Controle Total", desc: "Advogado com autonomia completa para gerenciar processos e informações.", color: "hsl(var(--red-accent))" },
+  { icon: Shield, title: "Controle Total", desc: "Advogado com autonomia completa para gerenciar processos e informações.", color: "hsl(var(--gold))" },
 ];
 
 const FeaturesSection = () => {
