@@ -30,7 +30,7 @@ const Index = () => {
       <FinalCTASection onOpenModal={() => setModalOpen(true)} />
       <Footer />
       {/* <WhatsAppFloat /> */}
-      <LeadModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      <LeadModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
   );
 };

@@ -28,9 +28,12 @@ const SIDEBAR_ITEMS = [
 interface DashboardLayoutProps {
   children: React.ReactNode;
   lawyerName?: string;
+  disableMenu?: boolean;
+  onAddProcessClick?: () => void;
+  addProcessEnabled?: boolean;
 }
 
-const DashboardLayout = ({ children, lawyerName = "Dr. Carlos Silva" }: DashboardLayoutProps) => {
+const DashboardLayout = ({ children, lawyerName = "Dr. Carlos Silva", disableMenu = false, onAddProcessClick, addProcessEnabled = true }: DashboardLayoutProps) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -57,14 +60,21 @@ const DashboardLayout = ({ children, lawyerName = "Dr. Carlos Silva" }: Dashboar
           return (
             <Link
               key={to}
-              to={to}
+              to={disableMenu ? "#" : to}
               className="min-w-0 shrink-0"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => {
+                if (disableMenu) {
+                  e.preventDefault();
+                  return;
+                }
+                setMobileMenuOpen(false);
+              }}
             >
               <div
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
-                  isActive
+                  disableMenu && "opacity-50 cursor-not-allowed",
+                  isActive && !disableMenu
                     ? "bg-primary/10 text-primary"
                     : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
                 )}
@@ -72,7 +82,7 @@ const DashboardLayout = ({ children, lawyerName = "Dr. Carlos Silva" }: Dashboar
                 <Icon
                   className={cn(
                     "h-5 w-5 shrink-0",
-                    isActive ? "text-primary" : "text-muted-foreground"
+                    isActive && !disableMenu ? "text-primary" : "text-muted-foreground"
                   )}
                 />
                 <span className="truncate">{label}</span>
@@ -152,16 +162,28 @@ const DashboardLayout = ({ children, lawyerName = "Dr. Carlos Silva" }: Dashboar
             <p className="text-sm font-medium text-foreground hidden md:block">{lawyerName}</p>
           </div>
           <p className="text-sm font-medium text-foreground flex-1 text-center md:hidden">{lawyerName}</p>
-          <Link to="/dashboard/adicionar-processo">
+          {addProcessEnabled ? (
+            <Link to="/dashboard/adicionar-processo" onClick={onAddProcessClick}>
+              <Button
+                variant="hero"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 text-xs md:text-sm"
+              >
+                <Plus className="h-4 w-4" />
+                <span className="hidden md:inline">Adicionar Processo</span>
+                <span className="md:hidden">+</span>
+              </Button>
+            </Link>
+          ) : (
             <Button
               variant="hero"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 text-xs md:text-sm"
+              disabled
+              className="bg-primary text-primary-foreground hover:bg-primary/90 text-xs md:text-sm opacity-50 cursor-not-allowed"
             >
               <Plus className="h-4 w-4" />
               <span className="hidden md:inline">Adicionar Processo</span>
               <span className="md:hidden">+</span>
             </Button>
-          </Link>
+          )}
         </header>
 
         {/* Page content */}

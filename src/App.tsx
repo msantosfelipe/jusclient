@@ -3,11 +3,11 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HashRouter, Routes, Route } from "react-router-dom";
-import VslPage from "./pages/VslPage";
 import Login from "./pages/Login";
 import LoginCliente from "./pages/LoginCliente";
 import Cadastro from "./pages/Cadastro";
 import Dashboard from "./pages/Dashboard";
+import DemoDashboard from "./pages/demo/DemoDashboard";
 import Processos from "./pages/dashboard/Processos";
 import DetalhesProcesso from "./pages/dashboard/DetalhesProcesso";
 import AdicionarProcesso from "./pages/dashboard/AdicionarProcesso";
@@ -31,11 +31,11 @@ const App = () => (
         <PageLoadingIndicator />
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/vsl" element={<VslPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/login-cliente" element={<LoginCliente />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/demo/dashboard" element={<DemoDashboard />} />
           <Route path="/dashboard/processos" element={<Processos />} />
           <Route path="/dashboard/processos/:id" element={<DetalhesProcesso />} />
           <Route path="/dashboard/adicionar-processo" element={<AdicionarProcesso />} />
