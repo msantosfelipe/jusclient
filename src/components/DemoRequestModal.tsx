@@ -120,26 +120,41 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
     setIsSubmitting(true);
 
     try {
-      // Enviar dados para Supabase
-      const { data, error: supabaseError } = await supabase
-        .from("leads_vsl")
-        .insert([
-          {
-            name: formData.name.trim(),
-            law_firm: formData.law_firm.trim(),
-            email: formData.email.trim().toLowerCase(),
-            city: formData.city.trim(),
-            state: formData.state,
-            lawyers_count: parseInt(formData.lawyers_count, 10),
-            created_at: new Date().toISOString(),
-          },
-        ]);
+      const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
 
-      if (supabaseError) {
-        console.error("Erro ao enviar para Supabase:", supabaseError);
-        setError("Não foi possível enviar agora. Tente novamente.");
-        setIsSuccess(false);
-        return;
+      if (isLocalhost) {
+        // Em desenvolvimento, apenas fazer log
+        console.log("Dados do formulário (modo desenvolvimento):", {
+          name: formData.name.trim(),
+          law_firm: formData.law_firm.trim(),
+          email: formData.email.trim().toLowerCase(),
+          city: formData.city.trim(),
+          state: formData.state,
+          lawyers_count: parseInt(formData.lawyers_count, 10),
+          created_at: new Date().toISOString(),
+        });
+      } else {
+        // Enviar dados para Supabase em produção
+        const { data, error: supabaseError } = await supabase
+          .from("leads_vsl")
+          .insert([
+            {
+              name: formData.name.trim(),
+              law_firm: formData.law_firm.trim(),
+              email: formData.email.trim().toLowerCase(),
+              city: formData.city.trim(),
+              state: formData.state,
+              lawyers_count: parseInt(formData.lawyers_count, 10),
+              created_at: new Date().toISOString(),
+            },
+          ]);
+
+        if (supabaseError) {
+          console.error("Erro ao enviar para Supabase:", supabaseError);
+          setError("Não foi possível enviar agora. Tente novamente.");
+          setIsSuccess(false);
+          return;
+        }
       }
 
       setIsSuccess(true);
