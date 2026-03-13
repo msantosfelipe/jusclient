@@ -12,7 +12,7 @@ import {
   X,
   Plus,
 } from "lucide-react";
-import { demoSessionService, DemoSessionData } from "@/lib/demoSession";
+import { demoSessionService, DemoSessionData, DemoAddedProcessData } from "@/lib/demoSession";
 
 type DemoStep = 1 | 2 | 3 | 4 | 5;
 
@@ -60,6 +60,7 @@ const DemoDashboard = () => {
   const navigate = useNavigate();
   const [demoSession, setDemoSession] = useState<DemoSessionData | null>(null);
   const [showFinalPopup, setShowFinalPopup] = useState(false);
+  const [addedProcess, setAddedProcess] = useState<DemoAddedProcessData | null>(null);
 
   useEffect(() => {
     const session = demoSessionService.getDemoSession();
@@ -68,6 +69,7 @@ const DemoDashboard = () => {
       return;
     }
     setDemoSession(session);
+    setAddedProcess(demoSessionService.getDemoAddedProcess());
   }, [navigate]);
 
   const handleNextStep = async () => {
@@ -208,36 +210,38 @@ const DemoDashboard = () => {
     </motion.div>
   );
 
+  const showGuideAndPopup = !addedProcess;
+  const addProcessEnabled = showFinalPopup && !addedProcess;
+
   return (
     <DashboardLayout
       lawyerName={demoSession.lawyerName}
       disableMenu={true}
-      addProcessEnabled={showFinalPopup}
+      addProcessEnabled={addProcessEnabled}
       addProcessTo="/demo/adicionar-processo"
     >
       <div className="space-y-8">
-        {/* Empty State Content */}
         <div className="space-y-8 mb-32">
-          {/* Step 1: Resumo */}
-          {currentStep >= 1 && (
+          {/* Cards de resumo (Step 1 ou pós-processo adicionado) */}
+          {(currentStep >= 1 || addedProcess) && (
             <div>
               <div className="grid gap-4 md:grid-cols-3">
                 {[
                   {
                     title: "Processos Ativos",
-                    value: "—",
+                    value: addedProcess ? "1" : "—",
                     subtext: "Plano Solo",
                     icon: "📋",
                   },
                   {
                     title: "Atualizações Hoje",
-                    value: "—",
+                    value: addedProcess ? "0" : "—",
                     subtext: "Últimas 24h",
                     icon: "🔔",
                   },
                   {
                     title: "Tempo Economizado",
-                    value: "—",
+                    value: addedProcess ? "0" : "—",
                     subtext: "Estimativa com automação",
                     icon: "⏱️",
                   },
@@ -245,7 +249,7 @@ const DemoDashboard = () => {
                   <Card
                     key={i}
                     className={`border-border bg-[#1E1E1E] transition-all ${
-                      currentStep >= 1 ? "opacity-100" : "opacity-30"
+                      currentStep >= 1 || addedProcess ? "opacity-100" : "opacity-30"
                     }`}
                   >
                     <CardHeader className="pb-3">
@@ -270,42 +274,81 @@ const DemoDashboard = () => {
             </div>
           )}
 
-          {/* Step 2: Meus Processos */}
-          {currentStep >= 2 && (
+          {/* Meus Processos: vazio ou com processo adicionado */}
+          {(currentStep >= 2 || addedProcess) && (
             <Card className="border-border bg-[#1E1E1E]">
               <CardHeader>
                 <CardTitle>Meus Processos</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-center py-8 text-muted-foreground">
-                  <AlertCircle className="h-8 w-8 mx-auto mb-2 opacity-30" />
-                  <p className="text-sm">
-                    Aqui você verá uma lista dos seus processos quando começar a adicionar clientes.
-                  </p>
-                </div>
+                {addedProcess ? (
+                  <div className="space-y-3">
+                    <div className="rounded-lg border border-border bg-background/50 p-4">
+                      <p className="font-medium text-foreground">
+                        {addedProcess.processNickname || addedProcess.processNumber}
+                      </p>
+                      <p className="text-sm text-muted-foreground font-mono mt-1">
+                        {addedProcess.processNumber}
+                      </p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Cliente: {addedProcess.clientName}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-2">
+                        Última movimentação: {addedProcess.ultimaMovimentacao} —{" "}
+                        {addedProcess.dataUltimaMovimentacao}
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center py-8 text-muted-foreground">
+                    <AlertCircle className="h-8 w-8 mx-auto mb-2 opacity-30" />
+                    <p className="text-sm">
+                      Aqui você verá uma lista dos seus processos quando começar a adicionar clientes.
+                    </p>
+                  </div>
+                )}
               </CardContent>
             </Card>
           )}
 
-          {/* Step 3: Meus Clientes */}
-          {currentStep >= 3 && (
+          {/* Meus Clientes: vazio ou com cliente adicionado */}
+          {(currentStep >= 3 || addedProcess) && (
             <Card className="border-border bg-[#1E1E1E]">
               <CardHeader>
                 <CardTitle>Meus Clientes</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-center py-8 text-muted-foreground">
-                  <AlertCircle className="h-8 w-8 mx-auto mb-2 opacity-30" />
-                  <p className="text-sm">
-                    A lista de clientes aparecerá aqui quando você criar convites.
-                  </p>
-                </div>
+                {addedProcess ? (
+                  <div className="space-y-3">
+                    <div className="rounded-lg border border-border bg-background/50 p-4">
+                      <p className="font-medium text-foreground">
+                        {addedProcess.clientName}
+                      </p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        E-mail: {addedProcess.clientEmail}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        WhatsApp: {addedProcess.clientWhatsapp}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-2">
+                        1 processo vinculado
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center py-8 text-muted-foreground">
+                    <AlertCircle className="h-8 w-8 mx-auto mb-2 opacity-30" />
+                    <p className="text-sm">
+                      A lista de clientes aparecerá aqui quando você criar convites.
+                    </p>
+                  </div>
+                )}
               </CardContent>
             </Card>
           )}
 
-          {/* Step 4: Feed de Atualizações */}
-          {currentStep >= 4 && (
+          {/* Feed de Atualizações — vazio (com ou sem processo adicionado) */}
+          {(currentStep >= 4 || addedProcess) && (
             <Card className="border-border bg-[#1E1E1E]">
               <CardHeader>
                 <CardTitle>Feed de Atualizações</CardTitle>
@@ -321,8 +364,8 @@ const DemoDashboard = () => {
             </Card>
           )}
 
-          {/* Step 5: Gestão de Ansiedade */}
-          {currentStep >= 5 && (
+          {/* Step 5: Gestão de Ansiedade — vazio com ou sem processo */}
+          {(currentStep >= 5 || addedProcess) && (
             <Card className="border-border bg-[#1E1E1E]">
               <CardHeader>
                 <CardTitle>Gestão de Ansiedade</CardTitle>
@@ -339,11 +382,11 @@ const DemoDashboard = () => {
           )}
         </div>
 
-        {/* Guide Card Popup */}
-        {!showFinalPopup && <GuideCard />}
+        {/* Guide Card Popup: não exibir quando há processo adicionado */}
+        {showGuideAndPopup && !showFinalPopup && <GuideCard />}
 
-        {/* Final Popup */}
-        {showFinalPopup && <FinalPopup />}
+        {/* Final Popup: não exibir quando há processo adicionado */}
+        {showFinalPopup && !addedProcess && <FinalPopup />}
       </div>
     </DashboardLayout>
   );

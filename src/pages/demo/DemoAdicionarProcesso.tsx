@@ -16,6 +16,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, Search, ChevronRight, ChevronLeft } from "lucide-react";
 import { demoSessionService, DemoSessionData } from "@/lib/demoSession";
+import { useToast } from "@/hooks/use-toast";
 
 const DEMO_ADD_PROCESS_STORAGE_KEY = "jusclient_demo_add_process_form";
 
@@ -66,6 +67,17 @@ const formatWhatsApp = (value: string) => {
   if (numbers.length <= 7) return `(${numbers.slice(0, 2)}) ${numbers.slice(2)}`;
   return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7)}`;
 };
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+function isValidEmail(email: string): boolean {
+  return EMAIL_REGEX.test(email.trim());
+}
+
+/** Brasil: 10 (fixo) ou 11 (celular) dígitos */
+function isValidWhatsApp(whatsapp: string): boolean {
+  const digits = whatsapp.replace(/\D/g, "");
+  return digits.length === 10 || digits.length === 11;
+}
 
 function loadFormFromStorage(): DemoAddProcessFormState {
   try {
@@ -141,6 +153,7 @@ const DEMO_PARTES = [
 
 const DemoAdicionarProcesso = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [demoSession, setDemoSession] = useState<DemoSessionData | null>(null);
   const [currentStep, setCurrentStep] = useState<DemoStep>(1);
 
@@ -213,6 +226,37 @@ const DemoAdicionarProcesso = () => {
   const isButtonEnabled = currentStep === TOTAL_DEMO_STEPS && allFieldsFilled;
 
   const handleConfirm = () => {
+    if (!isValidEmail(clientEmail)) {
+      toast({
+        title: "E-mail inválido",
+        description: "Informe um e-mail válido (ex: cliente@exemplo.com).",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (!isValidWhatsApp(clientWhatsapp)) {
+      toast({
+        title: "WhatsApp inválido",
+        description: "Informe um número válido com DDD (10 ou 11 dígitos). Ex: (11) 99999-9999",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (!searchResult) return;
+    const clientName =
+      selectedClient === "autor" ? "João da Silva" : "Empresa XPTO LTDA";
+    demoSessionService.setDemoAddedProcess({
+      processNumber,
+      processNickname,
+      clientName,
+      clientEmail: clientEmail.trim(),
+      clientWhatsapp,
+      ultimaMovimentacao: searchResult.ultimaMovimentacao,
+      dataUltimaMovimentacao: searchResult.dataUltimaMovimentacao,
+      tribunal: searchResult.tribunal,
+      vara: searchResult.vara,
+      assunto: searchResult.assunto,
+    });
     navigate("/demo/dashboard");
   };
 

@@ -6,7 +6,21 @@ export interface DemoSessionData {
   totalSteps: number;
 }
 
+export interface DemoAddedProcessData {
+  processNumber: string;
+  processNickname: string;
+  clientName: string;
+  clientEmail: string;
+  clientWhatsapp: string;
+  ultimaMovimentacao: string;
+  dataUltimaMovimentacao: string;
+  tribunal: string;
+  vara: string;
+  assunto: string;
+}
+
 const DEMO_SESSION_KEY = "jusclient_demo_session";
+const DEMO_ADDED_PROCESS_KEY = "jusclient_demo_added_process";
 
 export const demoSessionService = {
   // Inicializar sessão de demo
@@ -48,9 +62,20 @@ export const demoSessionService = {
     return current;
   },
 
-  // Limpar sessão
+  // Limpar sessão (inclui processo adicionado na demo)
   clearDemoSession: () => {
     sessionStorage.removeItem(DEMO_SESSION_KEY);
+    sessionStorage.removeItem(DEMO_ADDED_PROCESS_KEY);
+  },
+
+  // --- Processo adicionado na demo (após "Iniciar Monitoramento") ---
+  getDemoAddedProcess: (): DemoAddedProcessData | null => {
+    const data = sessionStorage.getItem(DEMO_ADDED_PROCESS_KEY);
+    return data ? JSON.parse(data) : null;
+  },
+
+  setDemoAddedProcess: (data: DemoAddedProcessData) => {
+    sessionStorage.setItem(DEMO_ADDED_PROCESS_KEY, JSON.stringify(data));
   },
 
   // Definir step específico
