@@ -31,9 +31,11 @@ interface DashboardLayoutProps {
   disableMenu?: boolean;
   onAddProcessClick?: () => void;
   addProcessEnabled?: boolean;
+  /** Quando em demo, usar ex.: "/demo/adicionar-processo" para o botão Adicionar Processo */
+  addProcessTo?: string;
 }
 
-const DashboardLayout = ({ children, lawyerName = "Dr. Carlos Silva", disableMenu = false, onAddProcessClick, addProcessEnabled = true }: DashboardLayoutProps) => {
+const DashboardLayout = ({ children, lawyerName = "Dr. Carlos Silva", disableMenu = false, onAddProcessClick, addProcessEnabled = true, addProcessTo = "/dashboard/adicionar-processo" }: DashboardLayoutProps) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -163,7 +165,7 @@ const DashboardLayout = ({ children, lawyerName = "Dr. Carlos Silva", disableMen
           </div>
           <p className="text-sm font-medium text-foreground flex-1 text-center md:hidden">{lawyerName}</p>
           {addProcessEnabled ? (
-            <Link to="/dashboard/adicionar-processo" onClick={onAddProcessClick}>
+            <Link to={addProcessTo} onClick={onAddProcessClick}>
               <Button
                 variant="hero"
                 className="bg-primary text-primary-foreground hover:bg-primary/90 text-xs md:text-sm"

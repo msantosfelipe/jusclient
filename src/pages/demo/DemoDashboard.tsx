@@ -190,26 +190,30 @@ const DemoDashboard = () => {
               Você finalizou a demonstração do Dashboard
             </p>
           </div>
-          <button
-            onClick={() => setShowFinalPopup(false)}
-            className="p-1 hover:bg-muted/30 rounded transition-colors"
-          >
-            <X className="h-4 w-4 text-muted-foreground" />
-          </button>
         </div>
-
         <p className="text-sm text-muted-foreground leading-relaxed">
           Agora clique no botão <strong>"Adicionar Processo"</strong> para começar a criar seu primeiro processo no Jusclient.
         </p>
+        <div className="mb-4"></div>
+        <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowFinalPopup(false)}
+            className="gap-1 w-full"
+          >
+            <ChevronLeft className="h-4 w-4" />
+            Anterior
+        </Button>
       </div>
     </motion.div>
   );
 
   return (
-    <DashboardLayout 
+    <DashboardLayout
       lawyerName={demoSession.lawyerName}
-      disableMenu={!showFinalPopup}
+      disableMenu={true}
       addProcessEnabled={showFinalPopup}
+      addProcessTo="/demo/adicionar-processo"
     >
       <div className="space-y-8">
         {/* Empty State Content */}

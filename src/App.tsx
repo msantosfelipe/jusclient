@@ -8,6 +8,7 @@ import LoginCliente from "./pages/LoginCliente";
 import Cadastro from "./pages/Cadastro";
 import Dashboard from "./pages/Dashboard";
 import DemoDashboard from "./pages/demo/DemoDashboard";
+import DemoAdicionarProcesso from "./pages/demo/DemoAdicionarProcesso";
 import Processos from "./pages/dashboard/Processos";
 import DetalhesProcesso from "./pages/dashboard/DetalhesProcesso";
 import AdicionarProcesso from "./pages/dashboard/AdicionarProcesso";
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/demo/dashboard" element={<DemoDashboard />} />
+          <Route path="/demo/adicionar-processo" element={<DemoAdicionarProcesso />} />
           <Route path="/dashboard/processos" element={<Processos />} />
           <Route path="/dashboard/processos/:id" element={<DetalhesProcesso />} />
           <Route path="/dashboard/adicionar-processo" element={<AdicionarProcesso />} />
